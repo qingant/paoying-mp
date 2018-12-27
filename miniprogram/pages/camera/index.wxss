@@ -1,0 +1,17 @@
+/* miniprogram/pages/camera/index.wxss */
+.shot {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  color: #fff;
+  background: rgb(252, 175, 6);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  line-height: 0;
+}

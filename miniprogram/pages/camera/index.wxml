@@ -1,0 +1,11 @@
+<view>
+<camera
+  device-position="back"
+  flash="off"
+  binderror="error"
+  style="width: 100%; height: 100vh"
+></camera>
+<cover-view class="shot">
+  <cover-view bindtap="takePhoto">📸</cover-view>
+</cover-view>
+</view>
