@@ -1,0 +1,6 @@
+<!--miniprogram/pages/login/login.wxml-->
+<view class="container">
+  <view class="button">
+    <button type="primary" v-if="canIUse" open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信登录</button>
+  </view>
+</view>

@@ -10,14 +10,23 @@
     "pages/chooseLib/chooseLib",
     "pages/search/index.wxml",
     "pages/search/page",
-    "camera/index",
-    "pages/camera/index"
+    "pages/camera/index",
+    "pages/login/login",
+    "pages/upload/upload",
+    "pages/post/post",
+    "pages/profile/profile"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#fff",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "Flaneur",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "泡影",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "permission": {
+        "scope.userLocation": {
+          "desc": "你的位置信息将用于产生图片流"
+        }
   }
 }

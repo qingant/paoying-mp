@@ -1,0 +1,213 @@
+/* miniprogram/pages/post/post.wxss */
+page {
+  background: #f3f5fa;
+}
+
+/* .photo__meta {
+  width: 100%;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+} */
+
+.photo__meta,
+.photo__footer {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 15px;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.photo__meta {
+  top: 0;
+  color: #050505;
+  background-color: rgba(0,0,0,0);
+}
+
+.photo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  /* border-radius: 10px; */
+  /* box-shadow: 2px 2px 8px #eee; */
+  margin-bottom: 1em;
+  overflow: hidden;
+  position: relative;
+  color: #000;
+}
+/* .photo:nth-child(n+1) {
+  border-bottom-color: #e74c3c;
+}
+.photo:nth-child(n+2) {
+  border-bottom-color: #e67e22;
+}
+.photo:nth-child(n+3) {
+  border-bottom-color: #f1c40f;
+}
+.photo:nth-child(n+4) {
+  border-bottom-color: #27ae60;
+} */
+
+.photo + .photo {
+  margin-bottom: 1em;
+}
+.photo__meta,
+.photo__footer {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 15px;
+  /* position: absolute; */
+  left: 0;
+  right: 0;
+}
+/* .photo__meta {
+  top: 0;
+  color: #000;
+  background: linear-gradient(to bottom, rgba(0,0,0,.5) 20%, rgba(0,0,0,0));
+} */
+.photo__footer {
+  bottom: 0;
+  color: #000;
+  /* background: linear-gradient(to bottom, rgba(0,0,0,0) 20%, rgba(0,0,0,.8)); */
+}
+
+.photo__image,
+.photo__image navigator,
+.photo__more,
+.photo__desc {
+  width: 100%;
+}
+.photo__image navigator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.photo__image image {
+  width: 100%;
+  min-height: calc(100vh - 150px);
+}
+.photo__desc {
+  padding: .5em 0;
+  color: #000;
+  font-size: .8em;
+}
+.photo__footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+.photo__more {
+  display: flex;
+  justify-content: space-between;
+}
+.photo__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-self: flex-end;
+  flex: 1;
+}
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #e58c8a;
+}
+.avatar + .avatar {
+  transform: translateX(-30%);
+}
+.photo__actions__comment {
+  margin-left: 1em;
+}
+.photo__meta {
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+}
+.photo__author__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.photo__author__name {
+  font-size: .7em;
+  margin-left: 6px;
+}
+
+.upload {
+  position: fixed;
+  bottom: 20px;
+  width: 70px;
+  height: 70px;
+  color: #fff;
+  background: rgb(252, 175, 6);
+  background-color: #eec0c6;
+  background-image: linear-gradient(315deg, #eec0c6 0%, #e58c8a 74%);
+  background-color: #d9e4f5;
+  background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  line-height: 0;
+  border: 2px solid #fff;
+  box-shadow: 0 0 6px #eee;
+  /* background: linear-gradient(
+        60deg, 
+        #e74c3c,  
+        #e74c3c 17%,
+        #e67e22 17%,
+        #e67e22 34%,
+        #f1c40f 34%,
+        #f1c40f 51%,
+        #27ae60 51%,
+        #27ae60 68%,
+        #3498db 68%,
+        #3498db 85%,
+        #9b59b6 85%,
+        #9b59b6     
+    ); */
+  /* background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+  background-size: 1800% 1800%;
+  animation: rainbow 18s ease infinite; */
+}
+
+@keyframes rainbow { 
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+
+.comments {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.comments__list {
+  padding: 15px;
+  padding-bottom: 100px;
+}
+.comment__author {
+  color: #f9d1b7;
+  margin-right: .5em;
+}
+.comments__box {
+  background-color: #d9e4f5;
+}
+.comments__box input {
+  background: #fff;
+  padding: 15px;
+  margin: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

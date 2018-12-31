@@ -1,0 +1,17 @@
+<!--miniprogram/pages/upload/upload.wxml-->
+<view class="container">
+  <view class="preview">
+    <image src="{{image}}" wx:if="{{image}}"  mode="aspectFit"></image>
+  </view>
+  <view class="location">
+    <!-- <text wx:if="{{location}}">发布到地点：{{location.name}}</text> -->
+  </view>
+  <view class="tags">
+    <textarea placeholder='写一些描述，可以用 # 加标签，用 @ 加地点' bindinput='onInput'></textarea>
+  </view>
+  <view class="actions">
+    <view bindtap="onUpload">
+      <image src="/images/upload.png" mode="aspectFill" />
+    </view>
+  </view>
+</view>

@@ -2,13 +2,13 @@
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
-	"appid": "wxd454bf351a7ec837",
+	"appid": "wxcc69bd3a25d042ad",
 	"projectname": "flaneur",
 	"libVersion": "2.2.5",
 	"condition": {

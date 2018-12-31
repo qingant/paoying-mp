@@ -1,2 +1,13 @@
 <!--miniprogram/pages/search/page.wxml-->
-<text>miniprogram/pages/search/page.wxml</text>
+<view class="container">
+  <view class="searchbar">
+    <view class="searchbar__input">
+      <input placeholder='搜索地点' auto-focus='true' bindconfirm="onSearch" ></input>
+    </view>
+  </view>
+  <view class="hints">
+    <view class="hint" wx:for="{{hints}}">
+    <text data-hint="{{item.name}}" bindtap="onTapHint">{{item.name}}</text>
+    </view>
+  </view>
+</view>

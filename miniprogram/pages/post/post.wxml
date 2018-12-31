@@ -1,0 +1,57 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- photolist -->
+
+    <view class="photo" wx:if="{{item}}">
+      <view class="photo__meta" wx:if="{{item.user}}">
+        <image class="photo__author__avatar" src="{{ item.user.avatar }}"></image>
+        <text class="photo__author__name">{{ item.user.name }}</text>
+      </view>
+
+
+      <view class="photo__meta" bindtap='deletePost' data-id="{{item._id}}">
+        ×
+      </view>
+      <view class="photo__image">
+        <image src="{{ item.image }}" mode="aspectFill" wx:if="{{ item.image }}"/>
+      </view>
+      
+      <view class="photo__footer">
+        <view class="photo__desc">
+          <text>{{ item.description }} </text>
+          <!-- <text wx:if="{{item.place}}">@ {{ item.place }}</text> -->
+        </view>
+        <view class="photo__more">
+          <view class="photo__likers" wx:if="{{ item.likers }}">
+            <view>
+              <image class="avatar" src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLrp15HWaicBurUF2hopiak297ODKbicoYnGITQta2Ea81ibMVsLEEiaQml5JMLE36ibNfSTEib7icvuYJianw/132" />
+              <image class="avatar" src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLrp15HWaicBurUF2hopiak297ODKbicoYnGITQta2Ea81ibMVsLEEiaQml5JMLE36ibNfSTEib7icvuYJianw/132" />
+            </view>
+          </view>
+          <view class="photo__actions">
+            <view class="photo__actions__like" bindtap="onTapLike" data-id="{{ item._id }}">
+              <text wx:if="{{!item.isLikedByMe}}">📷</text>
+              <text wx:if="{{item.isLikedByMe}}">📸</text>
+            </view>
+            <!-- <view class="photo__actions__comment" bindtap="onTapComment">🗣 </view> -->
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="comments">
+      <view class="comments__list">
+        <view class="comment" wx:for="{{comments}}" wx:if="{{comments}}">
+          <navigator url="../profile/profile?id={{item.user._id}}">
+            <text class="comment__author" wx:if="{{ item.user.nickName }}">{{ item.user.nickName }}</text>
+          </navigator>
+          
+          <text class="comment__text">{{ item.content }}</text>
+        </view>
+      </view>
+      <view class="comments__box">
+        <input placeholder="说点什么" bindconfirm="onComment" data-id="{{ item._id }}" value="{{inputText}}" type="text" confirm-type="send"></input>
+      </view>
+    </view>
+
+</view>
