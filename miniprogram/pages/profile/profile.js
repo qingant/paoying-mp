@@ -146,7 +146,7 @@ Page({
     var self = this;
     wx.chooseImage({
       count: 1,
-      sizeType: ["original"],
+      sizeType: ["compressed"],
       success: function (res) {
         var filePath = res.tempFilePaths[0];
         console.log("filepath", filePath);

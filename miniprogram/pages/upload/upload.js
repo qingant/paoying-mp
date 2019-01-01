@@ -1,6 +1,7 @@
 // miniprogram/pages/upload/upload.js
 
 const { request } = require("../../lib/request");
+const qiniuUploader = require("../../lib/qiniuUploader");
 
 function makeid() {
   var text = "";
@@ -104,6 +105,7 @@ Page({
     var cloudPath = makeid() + filePath.match(/\.[^.]+?$/)[0];
     var self = this;
     wx.showLoading();
+    
     wx.uploadFile({
       url: "https://dejavu.duozhuayu.net/api-py/v1/upload",
       filePath,

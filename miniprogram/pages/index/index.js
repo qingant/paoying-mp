@@ -147,9 +147,10 @@ Page({
     var self = this;
 
     var options = {};
-    if (this.data.selectedLocation.lantitude) {
-      options.latitude = this.data.selectedLocation.latitude;
-      options.longitude = this.data.selectedLocation.longitude;
+    var selectedLocation = wx.getStorageSync('selectedLocation')
+    if (selectedLocation.latitude) {
+      options.latitude = selectedLocation.latitude;
+      options.longitude = selectedLocation.longitude;
     }
     if (this.data.currentTag) {
       options.tag = this.data.currentTag;
@@ -162,6 +163,11 @@ Page({
       scrollTop: 0,
       duration: 300
     })
+    wx.setStorageSync('selectedLocation', {})
+    this.setData({
+      currentTag: ''
+    });
+    refresh(this);
   },
 
   onShow: function() {
@@ -174,22 +180,26 @@ Page({
         selectedLocation: savedLocation
       });
     }
-    if (savedTag !== this.data.currentTag) {
-      this.setData({
-        currentTag: savedTag
-      });
-    }
+    // if (savedTag !== this.data.currentTag) {
+    //   this.setData({
+    //     currentTag: savedTag
+    //   });
+    // }
     if (!db) {
       db = wx.cloud.database();
     }
-    var shouldReload = true;
-    // getApp().globalData.shouldReloadFeed;
+    var shouldReload = getApp().globalData.shouldReloadFeed;
     if (shouldReload) {
       console.log("saved location", savedLocation);
-      refresh(self, {
+      var options = {
         latitude: savedLocation.latitude,
         longitude: savedLocation.longitude
-      }).then(res => {
+      }
+      if (this.data.currentTag) {
+        options['tag'] = this.data.currentTag;
+      }
+      console.log('Showinit:', options)
+      refresh(self, options).then(res => {
         let allTags = calcTags(res, true);
         self.setData({
           allTags
@@ -197,6 +207,8 @@ Page({
       });
       getApp().globalData.shouldReloadFeed = false;
     }
+
+    // this.onTapTag()
 
     // db.collection("locations")
     //   .where({
@@ -215,7 +227,18 @@ Page({
     console.log("wechat userinfo", wxUserInfo);
   },
 
-  onLoad: function() {
+  onLoad: function(options) {
+    if (options) {
+      var geo = {
+        latitude: options.latitude,
+        longitude: options.longitude,
+        name: options.place
+      }
+      wx.setStorageSync('selectedLocation', geo);
+      // this.data.currentTag = options.tag;
+      this.setData({'currentTag': options.tag});
+      getApp().globalData.shouldReloadFeed = true;
+    }
     console.log("location", this.data.currentGeo);
     loginUtils.login(function() {
       console.log("login");
@@ -371,6 +394,7 @@ Page({
       success: function(res) {
         var filePath = res.tempFilePaths[0];
         console.log("filepath", filePath);
+        console.log(res)
         // wx.setStorageSync('tempPath', filePath);
         wx.setStorage({
           key: "tempPath",
@@ -406,7 +430,21 @@ Page({
     });
   },
 
-  onShareAppMessage: function () { },
+  onShareAppMessage: function () { 
+    var userinfo = wx.getStorageSync("userinfo");
+    var location = wx.getStorageSync("location")
+    var geo = this.data.selectedLocation.name && this.data.selectedLocation || location
+    console.log(location, this.data.selectedLocation, geo)
+    var path = `/pages/index/index?latitude=${geo.latitude}&longitude=${geo.longitude}&tag=${this.data.currentTag}&place=${geo.name && geo.name||''}`;
+    var desc = `${userinfo.nickName} ${geo.name && '@' + geo.name || ''} ${this.data.currentTag}`;
+    console.log(path, desc)
+
+    return {
+      title: "泡影",
+      desc: desc,
+      path: path
+    }
+  },
   // 上传图片
   doUpload: function() {
     // 选择图片

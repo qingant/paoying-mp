@@ -25,6 +25,11 @@ Page({
       this.setData({
         item: res.data
       });
+      var userinfo = wx.getStorageSync("userinfo");
+      console.log(userinfo)
+      this.setData({
+        user: userinfo
+      })
       console.log("post", res.data);
     });
     $request({
@@ -44,6 +49,7 @@ Page({
       url: `/post/${id_}`,
       method: 'DELETE'
     }).then(function (r) {
+      getApp().globalData.shouldReloadFeed = true;
       wx.navigateBack({
         
       })

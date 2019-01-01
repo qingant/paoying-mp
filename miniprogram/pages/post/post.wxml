@@ -9,7 +9,7 @@
       </view>
 
 
-      <view class="photo__meta" bindtap='deletePost' data-id="{{item._id}}">
+      <view class="photo__meta" bindtap='deletePost' data-id="{{item._id}}" wx:if="{{item.user_id == user._id}}">
         ×
       </view>
       <view class="photo__image">
