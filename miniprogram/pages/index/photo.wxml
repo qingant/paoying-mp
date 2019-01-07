@@ -1,0 +1,63 @@
+<template name="photo">
+      <view class="photo__meta">
+        <navigator url="../profile/profile?id={{item.user._id}}" class="photo__author__avatar">
+          <image src="{{ item.user.avatar}}"></image>
+        </navigator>
+        <view class="photo__meta__info">
+          <view class="photo__meta__top">
+            <text class="photo__author__name">{{ item.user.nickName }}</text>
+            <text class="photo__meta__place" bindtap='onTapPlace' data-g="{{item.photo_geo}}" data-p='{{item.place}}'>@{{ item.place || "某地" }}</text>
+          </view>
+          <view class="photo__meta__distance" wx:if="{{ item.distant }}">距离 {{ item.distant }}</view>
+        </view>
+        <view class="photo__meta__operation"  bindtap="onTapOpMore" data-p='{{item}}'>
+          ...
+        </view>
+      </view>
+      <view class="photo__image">
+        <navigator url="../post/post?id={{item._id}}" wx:if="{{item.url != 'pages/post/post'}}">
+          <image src="{{ item.image }}" mode="aspectFill" wx:if="{{ item.image }}" />
+        </navigator>
+        <image src="{{ item.image }}" mode="widthFix" wx:if="{{ item.url == 'pages/post/post' }}" />
+      </view>
+      <view class="photo__operations">
+        <image class="photo__op__like" src='/images/like.png' wx:if="{{ !item.isLikedByMe }}" bindtap='onTapLike' data-id="{{item._id}}"></image>
+        <image class="photo__op__like" src='/images/liked.png' wx:if="{{ item.isLikedByMe }}" bindtap='onTapUnLike' data-id="{{item._id}}"></image>
+
+        <image class='photo__op__comment' src='/images/comment.png' data-id="{{item._id}}" bindtap='onTapComment'></image>
+
+
+        <view class='photo__op__right'>
+          <image class='photo__op__fav' src='/images/fav.png' bindtap='onFav'></image>
+        </view>
+      </view>
+
+      <view class="photo__footer">
+        <navigator url="../likelist/likelist?post_id={{item._id}}" class="photo__liked" wx:if="{{item.gots.length > 0}}">
+          {{item.gots.length}}个喜欢
+        </navigator>
+        <!-- <view class="photo__desc">
+          <text>{{ item.description }}</text>
+        </view> -->
+        <view class="comments">
+          <view class="comments__list">
+            <view class="photo__desc__" wx:if="item.description">
+              <text class="comment__author" wx:if="{{ item.user.nickName }}">{{ item.user.nickName }}: </text>
+               <text class="comment__text">{{ item.description }}</text>
+            </view>
+            <navigator url='../post/post?id={{item._id}}' wx:if="{{item.url!='pages/post/post'}}">
+              <text class="comment" wx:if="{{item.comments.length > 1}}">...</text>
+            </navigator>
+            
+            <view class="comment" wx:for="{{item.url!='pages/post/post' && [item.comments[item.comments.length-1]] || item.comments}}" wx:for-item="comment" wx:if="{{item.comments}}">
+              <text class="comment__author" wx:if="{{ comment.user.nickName }}">{{ comment.user.nickName }}: </text>
+              <text class="comment__text">{{ comment.content }}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="photo__tags tag-picker" wx:if="{{item.tags}}">
+        <text wx:for="{{item.tags}}" bindtap="onTapTag" data-tag="{{item}}" class="tag {{ item == currentTag? 'tag--active': ''}}">{{item}}</text>
+      </view>
+</template>

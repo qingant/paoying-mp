@@ -102,6 +102,7 @@ Page({
 
   onUpload: function() {
     var filePath = wx.getStorageSync("tempPath");
+    console.log('UPLOAD PATH', filePath)
     var cloudPath = makeid() + filePath.match(/\.[^.]+?$/)[0];
     var self = this;
     wx.showLoading();

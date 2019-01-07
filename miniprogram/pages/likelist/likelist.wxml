@@ -1,0 +1,10 @@
+<!--miniprogram/pages/likelist/likelist.wxml-->
+<view class="container">
+  <view class="like__list" wx:for="{{likes}}">
+    <view class='like'>
+        <navigator url="../profile/profile?id={{item.user._id}}" class="photo__author__avatar">
+          <image src="{{ item.user.avatar}}"></image>
+        </navigator>
+    </view>
+  </view>
+</view>

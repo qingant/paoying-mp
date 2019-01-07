@@ -14,7 +14,8 @@
     "pages/login/login",
     "pages/upload/upload",
     "pages/post/post",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/likelist/likelist"
   ],
   "window": {
     "backgroundColor": "#fff",
@@ -25,8 +26,8 @@
     "enablePullDownRefresh": true
   },
   "permission": {
-        "scope.userLocation": {
-          "desc": "你的位置信息将用于产生图片流"
-        }
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于产生图片流"
+    }
   }
 }

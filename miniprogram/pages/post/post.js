@@ -21,7 +21,10 @@ Page({
     $request({
       url: `/post/${id}`
     }).then(res => {
-      res.data.isLikedByMe = false;
+      // res.data.isLikedByMe = false;
+      Object.assign(res.data, {
+        url: this.route
+      })
       this.setData({
         item: res.data
       });
@@ -40,6 +43,7 @@ Page({
         comments: res.data
       });
     });
+    console.log(this.route, 'Route');
   },
 
 
@@ -89,14 +93,17 @@ Page({
       }
     }).then(res => {
       let cid = res.data.comment_id;
-      let comments = this.data.comments.concat([
+      let comments = this.data.item.comments.concat([
         {
           comment_id: cid,
-          content
+          content,
+          user: userinfo
         }
       ]);
+      Object.assign(this.data.item, { comments });
       this.setData({
         comments,
+        item: this.data.item,
         inputText: ""
       });
       console.log("post comment success", res);

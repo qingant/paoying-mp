@@ -1,82 +1,37 @@
 <!--index.wxml-->
+<import src="./photo.wxml" />
 <view class="container">
 
   <view class="top">
-  <view class="searchbar">
-    <view class="searchbar__input" bindtap="onNavigateToSearch">
-      <text>搜索地点和 Tag</text>
-    </view>
-  </view>
-
-  <view class="header">
-    <view class="header__item">
-      <text>地点: </text>
-      <text>{{selectedLocation.name}}</text>
-    </view>
-    <view class="header__item header__item__tag" wx:if="{{currentTag}}">
-      <view>
-      <text>标签: </text>
-      <text>{{currentTag}}</text>
+    <view class="searchbar">
+      <view class="searchbar__input" bindtap="onNavigateToSearch">
+        <text>搜索地点和 Tag</text>
       </view>
     </view>
-    <view class="header__item tag-picker" wx:if="{{tags}}">
-      <text wx:for="{{tags}}" bindtap="onTapTag" data-tag="{{item}}" class="tag {{ item == currentTag? 'tag--active': ''}}">{{item}}</text>
-      <view wx:if="{{tags.length && showExpand }}" class="tag-picker-expand" bindtap="onTapExpandTag">🔻</view>
+
+    <view class="header">
+      <view class="header__item">
+        <text>地点: </text>
+        <text>{{selectedLocation.name}}</text>
+      </view>
+      <!-- <view class="header__item header__item__tag" wx:if="{{currentTag}}">
+        <view>
+          <text>标签: </text>
+          <text>{{currentTag}}</text>
+        </view>
+      </view> -->
+      <view class="header__item tag-picker" wx:if="{{tags}}">
+        <text wx:for="{{tags}}" bindtap="onTapTag" data-tag="{{item}}" class="tag {{ item == currentTag? 'tag--active': ''}}">{{item}}</text>
+        <view wx:if="{{tags.length && showExpand }}" class="tag-picker-expand" bindtap="onTapExpandTag">🔻</view>
+      </view>
     </view>
-  </view>
   </view>
 
   <!-- photolist -->
   <view class="photolist">
-    <view class="photo" wx:for="{{photos}}" wx:key="_id">
-      
-      <view class="photo__meta">
-        <navigator url="../profile/profile?id={{item.user._id}}" class="photo__author__avatar">
-          <image src="{{ item.user.avatar}}"></image>
-        </navigator>
-        <view class="photo__meta__info">
-          <text class="photo__author__name">{{ item.user.nickName }}</text>
-          <view class="photo__meta__distance" wx:if="{{ item.distant }}">距离 {{ item.distant }}</view>
-        </view>
-        <view class="photo__meta__operation">
-        ...
-        </view>
-      </view>
-      <view class="photo__image">
-        <navigator url="../post/post?id={{item._id}}">
-          <image src="{{ item.image }}" mode="aspectFill" wx:if="{{ item.image }}"/>
-        </navigator>
-      </view>
-      
-      <view class="photo__footer">
-        <view class="photo__desc">
-          <text>{{ item.description }}</text>
-        </view>
-        
-        <!-- <view class="photo__more">
-          <view class="photo__likers" wx:if="{{ item.likers }}">
-            <view>
-              <image class="avatar" src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLrp15HWaicBurUF2hopiak297ODKbicoYnGITQta2Ea81ibMVsLEEiaQml5JMLE36ibNfSTEib7icvuYJianw/132" />
-              <image class="avatar" src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLrp15HWaicBurUF2hopiak297ODKbicoYnGITQta2Ea81ibMVsLEEiaQml5JMLE36ibNfSTEib7icvuYJianw/132" />
-            </view>
-          </view>
-
-          <view class="photo__actions">
-            <view class="photo__actions__like" bindtap="onTapLike" data-id="{{ item._id }}">
-
-              <view wx:if="{{!item.gots.length}}">📷</view>
-              <view wx:if="{{item.gots.length}}">
-                <text>📸</text>
-                <text class="photo__likeCount">{{item.gots.length}}</text> 
-              </view>
-            </view>
-            <view class="photo__actions__comment" bindtap="onTapComment" data-id="{{ item._id }}">🗣 </view>
-          </view>
-        </view> -->
-        
-      </view>
-      
-    </view>
+   <view class="photo" wx:for="{{photos}}" wx:key="_id">
+    <template is="photo" data="{{item}}"></template>
+   </view>
   </view>
 
   <!-- <button
@@ -101,24 +56,24 @@
 
 
 
-<view class="navigation">
-  <view class="home" bindtap="onTapHome">
-    <!-- <navigator url="../index/index"> -->
+  <view class="navigation">
+    <view class="home" bindtap="onTapHome">
+      <!-- <navigator url="../index/index"> -->
       <!-- <text>🏠</text> -->
-    <!-- </navigator> -->
-    <image src="/images/home.png" mode="aspectFill"/>
+      <!-- </navigator> -->
+      <image src="/images/home.png" mode="aspectFill" />
+    </view>
+    <view class="upload">
+      <!-- <text bindtap="onOpenCamera">📷</text> -->
+      <image src="/images/camera-white.png" bindtap="onOpenCamera" mode="aspectFill" />
+    </view>
+    <view class="profile">
+      <navigator url="../profile/profile">
+        <!-- <text>🤳</text> -->
+        <image src="/images/me.png" mode="aspectFill" />
+      </navigator>
+    </view>
   </view>
-  <view class="upload">
-    <!-- <text bindtap="onOpenCamera">📷</text> -->
-    <image src="/images/camera-white.png" bindtap="onOpenCamera" mode="aspectFill"/>
-  </view>
-  <view class="profile">
-    <navigator url="../profile/profile">
-      <!-- <text>🤳</text> -->
-      <image src="/images/me.png" mode="aspectFill"/>
-    </navigator>
-  </view>
-</view>
   <!-- <view class=""></view> -->
 
 </view>
